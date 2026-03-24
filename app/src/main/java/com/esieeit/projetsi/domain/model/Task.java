@@ -1,6 +1,11 @@
 package com.esieeit.projetsi.domain.model;
 
+import java.util.Objects;
+
+import com.esieeit.projetsi.domain.enums.TaskPriority;
+import com.esieeit.projetsi.domain.enums.TaskStatus;
 import com.esieeit.projetsi.domain.exception.BusinessRuleException;
+import com.esieeit.projetsi.domain.validation.Validators;
 
 /**
  * Entité métier représentant une tâche appartenant à un projet.

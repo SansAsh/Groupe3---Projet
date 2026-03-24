@@ -2,6 +2,7 @@ package com.esieeit.projetsi.domain.validation;
 
 import java.util.regex.Pattern;
 
+import com.esieeit.projetsi.domain.exception.ValidationException;
 /**
  * Classe utilitaire centralisée pour les validations techniques.
  * Non instanciable — utiliser les méthodes statiques.

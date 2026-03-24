@@ -4,7 +4,6 @@ import java.util.Set;
 
 import com.esieeit.projetsi.domain.enums.UserRole;
 import com.esieeit.projetsi.domain.exception.BusinessRuleException;
-import com.esieeit.projetsi.domain.exception.ValidationException;
 import com.esieeit.projetsi.domain.model.Comment;
 import com.esieeit.projetsi.domain.model.Project;
 import com.esieeit.projetsi.domain.model.Task;
@@ -85,34 +84,6 @@ public class Demo {
         // ── 6. Validations techniques ──────────────────────────────
         System.out.println("--- Validations techniques ---");
 
-        // Email invalide
-        try {
-            new User("pas-un-email", "charlie", Set.of(UserRole.USER));
-        } catch (ValidationException e) {
-            System.out.println("✓ Email invalide détecté : " + e.getMessage());
-        }
-
-        // Username trop court
-        try {
-            new User("charlie@example.com", "ab", Set.of(UserRole.USER));
-        } catch (ValidationException e) {
-            System.out.println("✓ Username trop court détecté : " + e.getMessage());
-        }
-
-        // Nom de projet vide
-        try {
-            new Project("", null, alice);
-        } catch (ValidationException e) {
-            System.out.println("✓ Nom de projet vide détecté : " + e.getMessage());
-        }
-
-        // Contenu de commentaire vide
-        try {
-            new Comment("", t2, alice);
-        } catch (ValidationException e) {
-            System.out.println("✓ Commentaire vide détecté : " + e.getMessage());
-        }
-        System.out.println();
 
         // ── 7. Commentaire valide ──────────────────────────────────
         System.out.println("--- Commentaire valide ---");
