@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.esieeit.projetsi.domain.model.TaskWorkflowTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-03-25T15:51:54.296Z" hostname="ash-Latitude-E7440" time="0.018">
+<testsuite name="com.esieeit.projetsi.domain.model.TaskWorkflowTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-03-25T17:17:50.441Z" hostname="ash-Latitude-E7440" time="0.018">
   <properties/>
-  <testcase name="complete_shouldFail_whenStatusIsTodo()" classname="com.esieeit.projetsi.domain.model.TaskWorkflowTest" time="0.013"/>
+  <testcase name="complete_shouldFail_whenStatusIsTodo()" classname="com.esieeit.projetsi.domain.model.TaskWorkflowTest" time="0.014"/>
   <testcase name="workflow_shouldPass_forValidTransitions()" classname="com.esieeit.projetsi.domain.model.TaskWorkflowTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
