@@ -1,14 +1,14 @@
 # Package Structure - Clean Architecture simplifiée
 
-## 1) Objectif
+## 1 - Objectif
 
 Définir une structure de packages lisible, testable et évolutive pour éviter un code monolithique non structuré.
 
-## 2) Package racine
+## 2 - Package racine
 
 - `com.esieeit.projetsi`
 
-## 3) Structure proposée
+## 3 - Structure proposée
 
 ```text
 com.esieeit.projetsi
@@ -36,7 +36,7 @@ com.esieeit.projetsi
     └── config
 ```
 
-## 4) Rôle de chaque couche
+## 4 - Rôle de chaque couche
 
 ### domain
 
@@ -61,7 +61,7 @@ com.esieeit.projetsi
 - implémente les ports sortants
 - gère persistance, mapping technique, configuration framework
 
-## 5) Règles de dépendances
+## 5 - Règles de dépendances
 
 Règles obligatoires :
 
@@ -76,18 +76,18 @@ Règles interdites :
 - `domain` -> Spring/JPA/HTTP
 - `controller` -> `repository` direct
 
-## 6) Conventions de nommage
+## 6 - Conventions de nommage
 
 - Entités : `User`, `Project`, `Task`, `Comment`
 - Enums : `TaskStatus`, `TaskPriority`, `UserRole`
 - Services de cas d’usage : `CreateProjectService`, `ChangeTaskStatusService`
 - Ports : `ProjectRepositoryPort`, `TaskQueryPort`
 
-## 7) Exemple de flux d’appel
+## 7 - Exemple de flux d’appel
 
 `ProjectController` -> `CreateProjectService` -> `ProjectRepositoryPort` -> implémentation `JpaProjectRepositoryAdapter`
 
-## 8) Checklist architecture
+## 8 - Checklist architecture
 
 - [x] responsabilités séparées par couche
 - [x] dépendances orientées vers le domaine

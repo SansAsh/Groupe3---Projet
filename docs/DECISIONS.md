@@ -1,4 +1,4 @@
-# DECISIONS - Domain Modeling (mini ADR)
+# DECISIONS - Domain Modeling
 
 ## D-01 - Nom du package racine
 

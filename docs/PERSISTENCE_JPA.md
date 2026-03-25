@@ -1,4 +1,3 @@
-# Persistance JPA / Hibernate (TP 4.1)
 
 ## Objectif
 

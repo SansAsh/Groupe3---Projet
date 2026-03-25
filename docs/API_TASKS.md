@@ -1,4 +1,4 @@
-# API Tasks - TP 3.1
+# API Tasks
 
 ## Base URL
 
@@ -10,7 +10,7 @@
 
 ## Endpoints CRUD
 
-## 1) Créer une tâche
+## 1 - Créer une tâche
 
 - **Method**: `POST`
 - **URL**: `/api/tasks`
@@ -34,7 +34,7 @@
 }
 ```
 
-## 2) Lister les tâches
+## 2 - Lister les tâches
 
 - **Method**: `GET`
 - **URL**: `/api/tasks`
@@ -51,14 +51,14 @@
 ]
 ```
 
-## 3) Récupérer une tâche par id
+## 3 - Récupérer une tâche par id
 
 - **Method**: `GET`
 - **URL**: `/api/tasks/{id}`
 - **Response**: `200 OK`
 - **Not found**: `404 Not Found`
 
-## 4) Mettre à jour une tâche
+## 4 - Mettre à jour une tâche
 
 - **Method**: `PUT`
 - **URL**: `/api/tasks/{id}`
@@ -76,7 +76,7 @@
 - **Validation/Workflow error**: `400 Bad Request`
 - **Not found**: `404 Not Found`
 
-## 5) Supprimer une tâche
+## 5 - Supprimer une tâche
 
 - **Method**: `DELETE`
 - **URL**: `/api/tasks/{id}`
@@ -100,9 +100,3 @@ curl -i -X PUT http://localhost:8080/api/tasks/1 \
 
 curl -i -X DELETE http://localhost:8080/api/tasks/1
 ```
-
-## Notes TP
-
-- stockage en mémoire (`Map<Long, Task>`) uniquement pour la séance 3
-- gestion d’erreurs centralisée prévue en TP 3.2 (`@ControllerAdvice`)
-- DTOs utilisés pour ne pas exposer les entités domaine
