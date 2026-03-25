@@ -6,7 +6,7 @@ Toutes les erreurs de l’API utilisent la structure suivante :
 
 ```json
 {
-  "timestamp": "2026-02-24T11:00:00Z",
+  "timestamp": "2026-03-23T11:00:00Z",
   "status": 400,
   "error": "VALIDATION_ERROR",
   "message": "La requête est invalide",
