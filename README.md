@@ -39,11 +39,9 @@ Projet SI en Java : construire une API, structurée, documentée et testée, ave
 ### Cloner
 
 ```bash
-git clone <URL>
-cd <repo>
+git clone https://github.com/SansAsh/Groupe3---Projet.git
+cd <chemin_du_clone>
 ```
-
-## Lancer
 
 ### Tests
 
@@ -51,29 +49,44 @@ cd <repo>
 ./gradlew test
 ```
 
-### Run API Spring Boot (mode normal)
+### Run API Spring Boot
 
 ```bash
 ./gradlew bootRun
 ```
 
-### Run API Spring Boot (mode dev – avec jeu de données)
+### Run API Spring Boot
 
 ```bash
 ./gradlew bootRun --args='--spring.profiles.active=dev'
 ```
 
-Le profil `dev` active `DataInitializer` qui insère automatiquement 4 utilisateurs, 3 projets et 12 tâches si les tables sont vides.
+Le profil `dev` active `DataInitializer` qui insère 4 utilisateurs, 3 projets et 12 tâches si les tables sont vides.
 
-## Base de données (TP 4.1)
+## Base de données
 
-### 1) Préparer les variables d'environnement
+### 1 - Préparer les variables d'environnement
 
 ```bash
-cp .env.example .env
+cp .env.project .env
 ```
-
-### 2) Démarrer MySQL + phpMyAdmin
+### 1.2 - Démarrer Docker
+    ```bash
+    sudo systemctl start docker
+    ```
+    ```bash
+    sudo systemctl status docker
+    ```
+    ```bash
+    sudo systemctl enable docker
+    ```
+    ```bash
+    sudo systemctl restart docker
+    ```
+    ```bash
+    docker ps
+    ```
+### 2 - Démarrer MySQL + phpMyAdmin
 
 ```bash
 docker compose up -d
@@ -84,7 +97,7 @@ Services exposés par défaut :
 - MySQL : `localhost:3307`
 - phpMyAdmin : `http://localhost:8081`
 
-### 3) Lancer l'API
+### 3 - Lancer l'API
 
 ```bash
 ./gradlew bootRun
@@ -92,7 +105,7 @@ Services exposés par défaut :
 
 Au démarrage, Hibernate crée/met à jour automatiquement le schéma (`spring.jpa.hibernate.ddl-auto=update`).
 
-### 4) Arrêter l'environnement DB
+### 4 - Arrêter l'environnement DB
 
 ```bash
 docker compose down
@@ -109,17 +122,8 @@ docker compose down -v
 - `main` : stable
 - `develop` : intégration
 - `feature/*` : 1 user story = 1 branche
-- PR obligatoire vers `develop`
+- PR vers `develop`
 
-## Convention de commits
-
-- `chore(init): bootstrap gradle wrapper and project structure`
-- `docs(readme): add setup and workflow instructions`
-- `test(app): add initial sanity test`
-
-Format recommandé : `<type>(<scope>): <message>`
-
-Types courants : `feat`, `fix`, `chore`, `docs`, `refactor`, `test`.
 
 ## Backlog
 
@@ -145,29 +149,19 @@ Endpoints disponibles :
 - `PUT /api/tasks/{id}`
 - `DELETE /api/tasks/{id}`
 
-Exemple rapide :
-
-```bash
-curl -i -X POST http://localhost:8080/api/tasks \
-   -H "Content-Type: application/json" \
-   -d '{"title":"Initialiser le repo","description":"Créer Gradle + README"}'
-```
-
-## Validation & erreurs (TP 3.2)
+## Validation & erreurs
 
 - validation technique des DTOs avec Bean Validation (`@NotBlank`, `@Size`, `@Pattern`)
 - activation de validation via `@Valid` sur `POST`/`PUT`
 - gestion globale des erreurs via `@RestControllerAdvice`
 - format de réponse d’erreur JSON uniforme (`timestamp`, `status`, `error`, `message`, `path`, `details`)
 
-## Explication du code (fichier par fichier)
-
-### Vue d’ensemble du flux (requête -> réponse)
+## Explication du code
 
 1. Le client envoie une requête HTTP sur `/api/tasks`.
 2. `TaskController` reçoit le JSON et valide le DTO (`@Valid`).
 3. `TaskService` applique la logique métier et les règles de workflow.
-4. `TaskRepository` (implémenté en mémoire) persiste/récupère la donnée.
+4. `TaskRepository` récupère la donnée.
 5. `TaskMapper` convertit l’entité `Task` en `TaskResponse`.
 6. En cas d’erreur, `GlobalExceptionHandler` construit une réponse JSON standardisée.
 
