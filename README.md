@@ -180,7 +180,7 @@ Endpoints disponibles :
    - Rôle : ancien point d’entrée console du TP initial.
    - Note : n’est pas utilisé par Spring Boot mais conservé pour historique pédagogique.
 
-### API REST (couche HTTP)
+### API REST
 
 - `src/main/java/com/esieeit/projetsi/api/controller/TaskController.java`
    - Rôle : expose les endpoints CRUD REST.
@@ -234,7 +234,7 @@ Endpoints disponibles :
       - erreur inattendue -> `500 INTERNAL_ERROR`
    - Intérêt : réponses homogènes et exploitables côté front.
 
-### Application (logique d’orchestration)
+### Application
 
 - `src/main/java/com/esieeit/projetsi/application/service/TaskService.java`
    - Rôle : cœur applicatif des cas d’usage Task.
@@ -248,7 +248,7 @@ Endpoints disponibles :
    - Méthodes : `save`, `findById`, `findAll`, `deleteById`, `existsById`.
    - Intérêt : découple le service de la technologie de stockage.
 
-### Infrastructure (persistance temporaire)
+### Infrastructure
 
 - `src/main/java/com/esieeit/projetsi/infrastructure/repository/InMemoryTaskRepository.java`
    - Rôle : implémentation en mémoire de `TaskRepository`.
@@ -323,7 +323,7 @@ Endpoints disponibles :
 ### Documentation
 
 - `BACKLOG.md`
-   - Contenu : user stories, priorité (Must/Should/Nice), estimation, critères.
+   - Contenu : user stories, priorité, estimation, critères.
 
 - `docs/DOMAIN_MODEL.md`
    - Contenu : acteurs, cas d’usage, entités, cardinalités, diagramme Mermaid.
@@ -332,10 +332,10 @@ Endpoints disponibles :
    - Contenu : règles de dépendances entre couches.
 
 - `docs/DECISIONS.md`
-   - Contenu : décisions techniques/architecture (mini ADR).
+   - Contenu : décisions techniques/architecture.
 
 - `docs/DOMAIN_RULES.md`
-   - Contenu : invariants, validations, transitions et règles métier.
+   - Contenu : validations, transitions et règles métier.
 
 - `docs/API_TASKS.md`
    - Contenu : endpoints CRUD, exemples de requêtes/réponses, codes HTTP.
@@ -365,12 +365,11 @@ Endpoints disponibles :
    │  │  ├─ entity/          Task, Project, User, Comment  (JPA)
    │  │  ├─ enumtype/        Role, ProjectStatus, TaskStatus, TaskPriority
    │  │  ├─ exception/       ResourceNotFoundException, BusinessRuleException…
-   │  │  ├─ model/           Task, Project, User, Comment  (pure domain)
+   │  │  ├─ model/           Task, Project, User, Comment
    │  │  └─ validation/      Validators
    │  └─ infrastructure/
    │     ├─ repository/      TaskJpaRepository, ProjectJpaRepository, UserJpaRepository
-   │     │                   InMemoryTaskRepository  (désactivé)
-   │     └─ seed/            DataInitializer  (@Profile("dev"))
+   │     │                   InMemoryTaskRepository
    ├─ main/resources/
    │  └─ application.yml
    └─ test/java/com/esieeit/projetsi/
@@ -378,9 +377,8 @@ Endpoints disponibles :
       └─ domain/model/  TaskWorkflowTest, UserValidationTest
 ```
 
----
 
-## TP 4.2 – Repositories et données de test (Spring Data JPA)
+## Repositories et données de test
 
 ### Repositories créés
 
@@ -390,22 +388,17 @@ Endpoints disponibles :
 | `ProjectJpaRepository` | `Project` | `findByNameContainingIgnoreCase`, `findByOwnerId`, `findByStatus`, `existsByName` |
 | `UserJpaRepository` | `User` | `findByEmail`, `findByUsername`, `existsByEmail`, `existsByUsername` |
 
-### Migration du service
 
-`TaskService` a été migré des mocks en mémoire (`InMemoryTaskRepository`) vers **les repositories JPA** (`TaskJpaRepository` + `ProjectJpaRepository`).
+### Seed de données
 
-La création d'une tâche nécessite désormais un `projectId` valide dans le corps de la requête.
-
-### Seed de données (CommandLineRunner)
-
-`DataInitializer` (`@Profile("dev")`) insère des données de démonstration au premier démarrage si les tables sont vides (idempotent).
+`DataInitializer` (`@Profile("dev")`) insère des données de démonstration au premier démarrage si les tables sont vides
 
 Jeu de données :
-- **4 utilisateurs** : admin, alice, bob, carol
-- **3 projets** : Gestion des tâches, Support interne, Refonte API
+- **4 utilisateurs** : admin, remi, mathieux, jean-pierre
+- **3 projets** : Gestion des tâches, Support interne, API
 - **12 tâches** avec statuts variés (TODO, IN_PROGRESS, DONE), priorités et dates
 
-### Tests manuels (2026-02-26)
+### Tests manuels
 
 ```text
 [OK] GET  /api/tasks          → 200 (12 tâches seedées)
@@ -418,7 +411,7 @@ Jeu de données :
 [OK] POST /api/tasks (title vide) → 400 VALIDATION_ERROR
 ```
 
-### Exemples curl TP 4.2
+### Exemples curl
 
 ```bash
 # Lister toutes les tâches
